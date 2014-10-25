@@ -2,9 +2,9 @@
 Jquery plugin to limit the chacters within a text area.
 
 ## Files:
-jQuery.limitTextarea/jQuery.limitTextarea.css
+jQuery.limitTextarea.css
 
-jQuery.limitTextarea/jQuery.limitTextarea.js
+jQuery.limitTextarea.js
 
 ## Required Files:
 jQuery.limitTextarea.css
@@ -33,9 +33,9 @@ jQuery(elemnt).limitTextarea(options);
 
 ##Example:
 ```html
-<link rel="stylesheet" type="text/css" media="screen" href="jQuery.limitTextarea/jQuery.limitTextarea.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jQuery.limitTextarea.css" />
 
-<script type="text/javascript" src="jQuery.limitTextarea/jQuery.limitTextarea.js"></script>
+<script type="text/javascript" src="jQuery.limitTextarea.js"></script>
 <script type="text/javascript">
     jQuery(docuemnt).ready(function() {
         jQuery('#myTextarea').limitTextarea();
