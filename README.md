@@ -35,7 +35,7 @@ jQuery(elemnt).limitTextarea(options);
 ```html
 <link rel="stylesheet" type="text/css" media="screen" href="jQuery.limitTextarea/jQuery.limitTextarea.css" />
 
-<script type="text/javascript" src="jQuery.limitTextarea/jQuery.limitTextarea.js">
+<script type="text/javascript" src="jQuery.limitTextarea/jQuery.limitTextarea.js"></script>
 <script type="text/javascript">
     jQuery(docuemnt).ready(function() {
         jQuery('#myTextarea').limitTextarea();
