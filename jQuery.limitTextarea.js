@@ -6,6 +6,24 @@
             e = element,
             id = $(e).attr('id'),
             idPart = '-limitTextarea-',
+            keyState = {
+                shift: {
+                    keyCode: 16,
+                    down: false
+                },
+                ctrl: {
+                    keyCode: 17,
+                    down: false
+                },
+                alt: {
+                    keyCode: 18,
+                    down: false
+                },
+                altgr: {
+                    keyCode: 225,
+                    down: false
+                }
+            },
             overridable = [
                 'afterInit',
                 'afterKeyDown',
@@ -22,6 +40,26 @@
             ]
         ;
         /* End Private Variables */
+        
+        /* Start Private Functions */
+        function setKeyState(keyCode, state) {
+            var state = (state) ? true : false;
+            switch(keyCode) {
+                case 16:
+                    keyState.shift.down = state;
+                    break;
+                case 17:
+                    keyState.ctrl.down = state;
+                    break;
+                case 18:
+                    keyState.alt.down = state;
+                    break;
+                case 225:
+                    keyState.altgr.down = state;
+                    break;
+            }
+        }
+        /* End Private Functions */
         
         /* Start Create Object */
         var obj = {
@@ -89,24 +127,48 @@
                         16,
                         17,
                         19,
+                        20,
                         27,
                         35,
                         36,
                         37,
+                        38,
                         39,
+                        40,
+                        45,
                         46,
+                        144,
+                        145
+                    ],
+                    allowedCtrlKeys = [
+                        35,
+                        36,
                         67,
                         86,
                         88,
                         89,
                         90,
-                        144,
-                        145
-                    ]
+                    ],
+                    allowedShiftKeys = [
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40
+                    ],
+                    testKeys = $.inArray(parseInt(keyCode), allowedKeys),
+                    testCtrlKeys = $.inArray(parseInt(keyCode), allowedCtrlKeys),
+                    testShiftKeys = $.inArray(parseInt(keyCode), allowedShiftKeys)
                 ;
                 if($(e).data('limittextareaLimitreached')) {
-                    if($.inArray(parseInt(keyCode), allowedKeys) < 0)
+                    if(
+                       !(keyState.ctrl.down && testCtrlKeys >= 0) &&
+                       !(keyState.shift.down && testShiftKeys >= 0) &&
+                       (testKeys < 0)
+                    ) {
                         event.preventDefault();
+                    }
                 }
                 window.setTimeout(
                     function() {
@@ -337,12 +399,12 @@
         /* End Set Options */
         
         /* Start Set Event Listeners */
-        $(e).on('keydown', function(event) { obj.onKeyDown(event).characterCount(); });
-        $(e).on('keyup', function() { obj.onKeyUp(event).characterCount(); });
+        $(e).on('keydown', function(event) { setKeyState(event.keyCode, true); obj.onKeyDown(event).characterCount(); });
+        $(e).on('keyup', function(event) { setKeyState(event.keyCode);obj.onKeyUp(event).characterCount(); });
         $(e).on('mouseDown', function(event) { obj.afterKeyUp(event).characterCount(); });
-        $(e).on('mouseup', function() { obj.onMouseUp(event).characterCount(); });
-        $(e).on('contextmenu', function() { obj.onContextMenu(event).characterCount(); });
-        $(e).on('cut', function() { obj.onCut(event).characterCount(); });
+        $(e).on('mouseup', function(event) { obj.onMouseUp(event).characterCount(); });
+        $(e).on('contextmenu', function(event) { obj.onContextMenu(event).characterCount(); });
+        $(e).on('cut', function(event) { obj.onCut(event).characterCount(); });
         $(e).on('paste', function(event) { obj.onPaste(event).characterCount(); });
         
         $(e).on('empty', function(event) { obj.onEmpty(event); });
