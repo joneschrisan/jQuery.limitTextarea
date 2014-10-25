@@ -13,10 +13,10 @@ jQuery.limitTextarea.js
 
 ## Usage:
 ```javascript
-jQuery(elemnt).limitTextarea([*options*]);
+jQuery(elemnt).limitTextarea(*options*);
 ```
 ```html
-<textarea id="id" [*data-options*]></textarea>
+<textarea id="id" *data-options*></textarea>
 ```
 
 
