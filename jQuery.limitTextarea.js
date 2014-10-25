@@ -79,7 +79,35 @@
             /* Start Events */
             /* Start Non Editable Events */
             onKeyDown: function(event) {
-                var t = this;
+                var
+                    t = this,
+                    keyCode = event.keyCode,
+                    key = String.fromCharCode(keyCode),
+                    allowedKeys = [
+                        8,
+                        9,
+                        16,
+                        17,
+                        19,
+                        27,
+                        35,
+                        36,
+                        37,
+                        39,
+                        46,
+                        67,
+                        86,
+                        88,
+                        89,
+                        90,
+                        144,
+                        145
+                    ]
+                ;
+                if($(e).data('limittextareaLimitreached')) {
+                    if($.inArray(parseInt(keyCode), allowedKeys) < 0)
+                        event.preventDefault();
+                }
                 window.setTimeout(
                     function() {
                         $(e).trigger('afterKeyDown');
@@ -89,7 +117,11 @@
                 return t;
             },
             onKeyUp: function(event) {
-                var t = this;
+                var
+                    t = this,
+                    keyCode = event.keyCode,
+                    key = String.fromCharCode(keyCode)
+                ;
                 window.setTimeout(
                     function() {
                         $(e).trigger('afterKeyUp');
