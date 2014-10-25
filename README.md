@@ -59,7 +59,7 @@ jQuery(elemnt).limitTextarea(options);
 
 
 ##Editable Methods:
-**afterInit**: Fired after int is called.
+**afterInit**: Fired after *init* is called.
 
 **afterKeyDown**: Fired after *onKeyDown* fires.
 
