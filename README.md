@@ -32,16 +32,18 @@ jQuery(elemnt).limitTextarea(options);
 
 
 ##Example:
-    <link rel="stylesheet" type="text/css" media="screen" href="jQuery.limitTextarea/jQuery.limitTextarea.css" />
-    
-    <script type="text/javascript" src="jQuery.limitTextarea/jQuery.limitTextarea.js">
-    <script type="text/javascript">
-        jQuery(docuemnt).ready(function() {
-            jQuery('#myTextarea').limitTextarea();
-        });
-    </script>
-    
-    <textarea id="myTextarea" class="limitTextarea" data-limitTextarea-limit="10"></textarea>
+```html
+<link rel="stylesheet" type="text/css" media="screen" href="jQuery.limitTextarea/jQuery.limitTextarea.css" />
+
+<script type="text/javascript" src="jQuery.limitTextarea/jQuery.limitTextarea.js">
+<script type="text/javascript">
+    jQuery(docuemnt).ready(function() {
+        jQuery('#myTextarea').limitTextarea();
+    });
+</script>
+```
+
+<textarea id="myTextarea" class="limitTextarea" data-limitTextarea-limit="10"></textarea>
 
 ##Options:
 **limit**: (*Int*) The maximum limit of characters for the text area
