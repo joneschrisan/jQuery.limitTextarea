@@ -82,7 +82,7 @@ jQuery(elemnt).limitTextarea(options);
 
 **data-limitTextarea-limitReached**: *(Bool)* True if the limt has been reached false if not.
 
-**data-limitTextarea-disableMontextMenu**: *(Bool)* True if the context menu is to be disabled false if not.
+**data-limitTextarea-disableContextMenu**: *(Bool)* True if the context menu is to be disabled false if not.
 
 
 ##Editable Methods:
@@ -124,7 +124,7 @@ jQuery(elemnt).limitTextarea(options);
 
 **limit([*Int value*])**: Sets or gets the maximum limit. (Sets: data-limitTextarea-limit)
 
-**disableContextMenu([*Bool value*])**: Sets or gets weather not to disable the context menu on the textarea. (Sets: data-limitTextarea-disableMontextMenu)
+**disableContextMenu([*Bool value*])**: Sets or gets weather not to disable the context menu on the textarea. (Sets: data-limitTextarea-disableContextMenu)
 
 ##Handeled Events:
 **onKeyDown**: Fired when a keyboard button is depressed. *Calls characterCount* *Fires afterKeyDown*
