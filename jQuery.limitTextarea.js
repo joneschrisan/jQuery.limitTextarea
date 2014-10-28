@@ -60,7 +60,11 @@
                 'afterEmpty',
                 'afterNotEmpty',
                 'afterWithinLimit',
-                'afterReachLimit',
+                'afterReachLimit'
+            ],
+            settable = [
+                'limit',
+                'disableContextMenu'
             ]
         ;
         /* End Private Variables */
@@ -95,6 +99,7 @@
                     $(e).data('limittextareaCharactercount', ($(e).data('limittextareaCharactercount')) ? $(e).data('limittextareaCharactercount') : 0);
                     $(e).data('limittextareaIsempty', ($(e).data('limittextareaIsempty')) ? $(e).data('limittextareaIsempty') : false);
                     $(e).data('limittextareaLimitreached', ($(e).data('limittextareaLimitreached')) ? $(e).data('limittextareaLimitreached') : false);
+                    $(e).data('limittextareaDisablecontextmenu', ($(e).data('limittextareaDisablecontextmenu')) ? $(e).data('limittextareaDisablecontextmenu') : 'false');
                     
                     t.characterCount();
                     t.drawCounter();
@@ -238,12 +243,16 @@
             },
             onContextMenu: function(event) {
                 var t = this;
-                window.setTimeout(
-                    function() {
-                        $(e).trigger('afterContextMenu');
-                    },
-                    0
-                );
+                if($(e).data('limittextareaDisablecontextmenu') === true) {
+                    event.preventDefault();
+                } else {
+                    window.setTimeout(
+                        function() {
+                            $(e).trigger('afterContextMenu');
+                        },
+                        0
+                    );
+                }
                 return t;
             },
             onCut: function(event) {
@@ -258,6 +267,12 @@
             },
             onPaste: function(event) {
                 var t = this;
+                window.setTimeout(
+                    function() {
+                        t.characterCount();
+                    },
+                    0
+                );
                 window.setTimeout(
                     function() {
                         $(e).trigger('afterPaste');
@@ -380,7 +395,7 @@
                     $(e).data('limittextareaCharactercount', $(e).val().length);
                     returns = $(e).data('limittextareaCharactercount');
                     
-                    if($(e).val().length == 0) {
+                    if($(e).data('limittextareaCharactercount') == 0) {
                         $(e).trigger('empty');
                     } else {
                         $(e).trigger('notempty');
@@ -399,11 +414,14 @@
                 
                 if(t.initialized)
                     t.updateCounter();
-                    
+                
                 return returns;
             },
             limit: function(val) {
                 return (val) ? $(e).data('limittextareaLimit', val) : $(e).data('limittextareaLimit');
+            },
+            disableContextMenu: function(val) {
+                return (val) ? $(e).data('limittextareaDisablecontextmenu', val) : $(e).data('limittextareaDisablecontextmenu');
             }
             /* End Properties */
         };
@@ -416,6 +434,8 @@
                     var value = options[key];
                     if($.inArray(key, overridable) >= 0) {
                         obj[key] = options[key];
+                    } else if($.inArray(key, settable) >= 0) {
+                        obj[key](value);
                     }
                 }
             );
