@@ -21,7 +21,6 @@
 ** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  **
 ** SOFTWARE.                                                                      **
 \**********************************************************************************/
-
 (function($) {
     /* Start Objct Constructor */
     var LimitTextarea = function(element, options) {
@@ -31,41 +30,16 @@
             id = $(e).attr('id'),
             idPart = '-limitTextarea-',
             keyState = {
-                shift: {
-                    keyCode: 16,
-                    down: false
-                },
-                ctrl: {
-                    keyCode: 17,
-                    down: false
-                },
-                alt: {
-                    keyCode: 18,
-                    down: false
-                },
-                altgr: {
-                    keyCode: 225,
-                    down: false
-                }
+                shift: { keyCode: 16, down: false },
+                ctrl: { keyCode: 17, down: false },
+                alt: { keyCode: 18, down: false },
+                altgr: { keyCode: 225, down: false }
             },
-            overridable = [
-                'afterInit',
-                'afterKeyDown',
-                'afterKeyUp',
-                'afterMouseDown',
-                'afterMouseUp',
-                'afterContextMenu',
-                'afterCut',
-                'afterPaste',
-                'afterEmpty',
-                'afterNotEmpty',
-                'afterWithinLimit',
-                'afterReachLimit'
-            ],
-            settable = [
-                'limit',
-                'disableContextMenu'
-            ]
+            overridable = [ 'afterInit', 'afterKeyDown', 'afterKeyUp', 'afterMouseDown', 'afterMouseUp', 'afterContextMenu', 'afterCut', 'afterPaste', 'afterEmpty', 'afterNotEmpty', 'afterWithinLimit', 'afterReachLimit' ],
+            settable = [ 'limit', 'disableContextMenu' ],
+            allowedKeys = [ 8, 9, 16, 17, 19, 20, 27, 35, 36, 37, 38, 39, 40, 45, 46, 144, 145 ],
+            allowedCtrlKeys = [ 35, 36, 67, 86, 88, 89, 90, ],
+            allowedShiftKeys = [ 35, 36, 37, 38, 39, 40 ]
         ;
         /* End Private Variables */
         
@@ -150,42 +124,6 @@
                     t = this,
                     keyCode = event.keyCode,
                     key = String.fromCharCode(keyCode),
-                    allowedKeys = [
-                        8,
-                        9,
-                        16,
-                        17,
-                        19,
-                        20,
-                        27,
-                        35,
-                        36,
-                        37,
-                        38,
-                        39,
-                        40,
-                        45,
-                        46,
-                        144,
-                        145
-                    ],
-                    allowedCtrlKeys = [
-                        35,
-                        36,
-                        67,
-                        86,
-                        88,
-                        89,
-                        90,
-                    ],
-                    allowedShiftKeys = [
-                        35,
-                        36,
-                        37,
-                        38,
-                        39,
-                        40
-                    ],
                     testKeys = $.inArray(parseInt(keyCode), allowedKeys),
                     testCtrlKeys = $.inArray(parseInt(keyCode), allowedCtrlKeys),
                     testShiftKeys = $.inArray(parseInt(keyCode), allowedShiftKeys)
